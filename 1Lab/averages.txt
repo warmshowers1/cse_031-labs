@@ -1,0 +1,24 @@
+# Collaborators include: Valerie Nguyen, Preethi Merugumala
+
+main(){
+	positiveTotal = 0;
+	negativeTotal = 0;
+	
+	while(input != 0){
+		print("Enter integer: ");
+		user = input(int);
+		if(user > 0){
+			positiveTotal += user;
+			positiveNums++;
+		}
+		else{
+			negativeTotal += user;
+			negativeNums++;
+		}
+	}
+	positiveAverage = positiveTotal / positiveNums;
+	negativeAverage = negativeTotal / negativeNums;
+
+	print(positiveAverage);
+	print(negativeAverage);
+}

@@ -1,0 +1,45 @@
+TPS #1:
+1. Preethi M. & Valerie N.
+2. 	a. https://www.gnu.org/software/gdb/
+	b. https://www.geeksforgeeks.org/gdb-step-by-step-introduction/
+	c. https://web.eecs.umich.edu/~sugih/pointers/summary.html
+3. *Completed*
+4. *Completed*
+5. *Completed*
+
+TPS #2:
+1. Command: gcc -g punishment.c -o punish
+2. Command: gdb punish
+3. Command: run
+4. 	a. A breakpoint is a line in the code that you choose to stop debugger on when it starts executing that line of code. This is used help determine where the code is erroring. 
+	b. Command: break punishment.c:[LINE NUMBER]
+	c. Command: break punishment.c:16
+5. Command: step
+6. Command: print [VARIABLE]
+7. Command: continue
+8. Command: q
+
+TPS #3:
+1. 4 variables total. 2 pointers. 
+2. All values should start out as NULL since they were not set to any specific value. However after inserting print statements for verification, I actually found that these variables already have values assigned to them due to the information that had previously been assigned to the bytes these variables were allocated. 
+3. By making every variable declarating static, it prevents said variables from being assigned to the values that were originally stored at those memory locations. 
+4. *Completed*
+5. Can confirm, the values of px & py are the same as the addresses of x & y.
+6. Due to the steps taken previously, the contents of the array is entirely filled with zeros.
+7. They are in fact, the same as pointers. They are able to be printed like pointers and can be manipulated like pointers. 
+8. The address it prints is the same as the address of the first element in the array. According to Stack Overflow, the reason this is, is because when an array is created, the address of the array name (which is a pointer) gets evaluated to the same address as the first array element. This description is still quite confusing and I hope that further clarification can be given. 
+https://stackoverflow.com/questions/2528318/how-come-an-arrays-address-is-equal-to-its-value-in-c
+
+Assignment #1:
+1. According to the debugger it is line 15. 
+2. The scanf function needed to be given an address to store the input, rather than the variable name this value is associated with. 
+3. The bug is that the sum variable is not being manipulated by the read_values method, so after read_values is called, it remains to be zero. Of course, since the sum is zero, then zero divided by most anything is still zero. 
+4. To fix the bug, the read_values method needs to be changed so that its' parameter is the address of the sum variable rather than sum variable itself. This way we will be able to modify the value at that address so that the modifying information isn't lost after the method is called. 
+
+Assignment #2:
+1. It is not, there is an extra bit of text that was printed after the appended text. 
+2. The arrays are stored right next to each other in terms of their memory addresses, so when the program appends str1 with str2, it doesn't erase the original characters in str2. Thus they get printed at the end of the appended string. 
+3. This is not what you would expect. This is happening due to the memory addresses of both strings being right next to each other. This makes them overlap the strings due to the lack of character spots we made available. This can actually be fixed very easily by increasing the number of characters str1 and str2 can hold. 
+
+Assignment #3:
+*Completed*

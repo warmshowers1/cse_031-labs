@@ -1,0 +1,30 @@
+TPS #1:
+1. Preethi M., Valerie N.
+2.      a. https://www.youtube.com/watch?v=GFGImSdJNWk
+	b. https://www.ubuntupit.com/the-50-best-linux-commands-to-run-in-the-terminal/
+	c. https://www.pcsteps.com/5010-basic-linux-commands-terminal/
+3. *Completed*
+4. *Completed*
+
+TPS #2: 
+1. Ctrl + Alt + T
+	a. Yes
+	b. It would be wise to have multiple terminals open so that you can run multiple processes at the same time. 
+2. Command: ls
+3. Command: cd Desktop
+4. Command: mkdir CSE31
+5. *Completed*
+6. Command: cd CSE31 [ENTER] mkdir Lab_1
+7. *Completed*
+
+TPS #3:
+1.      a. https://web.stanford.edu/class/cs107/resources/gcc
+	b. https://www.geeksforgeeks.org/gcc-command-in-linux-with-examples/
+2. *Completed*
+3. Command: gcc main.c -o main
+4. No error message will pop up, and a new object file will be output in the same directory. 
+5. It will create an object file meant to be used for creating libraries. 
+6. This tag creates a file filled with debugging info.
+7. You can either move the executable to another file name called cselab1
+8. It produces a file named a.out which is the executable. 
+9. Command: ./a/out

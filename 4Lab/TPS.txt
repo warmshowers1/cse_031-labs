@@ -1,0 +1,30 @@
+Paired with Preethi Merugumala & Valerie Nguyen
+
+Activity #1:
+1. 2
+2. I expected it to be an absurdly large negative number that I wouldn't be able to compute in my head. 
+3. *Completed*
+4. I am not surprised.
+5. 
+	a. 1
+	b. four_c = (char*)four_ints;
+	   This line specifies that they are pointing to the same location, however, four_c will traversing every byte, while four_ints will be traversing every 4 bytes, due to their data types. 
+	c. *Completed*
+6. 4 bytes.
+7. [-1000610864, -1000610860, -1000610856, -1000610852] 
+   [44434241, 2, 2, 2]
+8. 1 byte differences. Meaning that it's only traversing the individual bytes and changing each 8 bit set of information contained in the 32 bit integer. This is why the intger changes so drastically when the four_c pointer starts changing information in the array. 
+9. [41, 42, 43, 44, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0]
+   [-171704048, -171704047, -171704046, -171704045, -171704044, -171704043, -171704042, -171704041, -171704040, -171704039, -171704038, -171704037, -171704036, -171704035, -171704034, -171704033]
+10. The memory addresses are ordered essentially backwards because the first 8 bits contain the first 2^n values from 0-7, allowing up to 256 values. However the next byte allows the next 8-15 places. This continues until the final byte which contains the 24-31 places. I assume this is an organizational tactic used to read the values easily. 
+11. *Completed*
+
+Activity #2:
+1. This line allocates enough bytes of memory to hold 5 pointers and allocates it to a double pointer called arr. 
+2. arr[i]
+3. *Completed*
+4. When passing a pointer/array into a function, the size of that array is lost. Therefore, it is more necessary to pass the size of the array as a parameter for much easier coding function. 
+5. *Completed*
+6. *Completed*
+7. *Completed*
+8. *Completed*

@@ -1,0 +1,29 @@
+Paired with Preethi Merugumala & Valerie Nguyen
+
+Activity #1:
+1. MIPS Assembly Runtime Simulator
+2. *Completed*
+3. *Completed*
+4. 
+    a. Click open and find the file. 
+    b. Fn + F3
+    c. Fn + F5
+    d. No
+    e. Step: Fn + F7
+    f. Reassemble it and Rerun it.
+
+Activity #2:
+1. Answers obtained from: http://students.cs.tamu.edu/tanzir/csce350/reference/assembler_dir.html
+    .data = The memory location in which you would like to start storing your data.
+    .text = The next items are put in the user text segment. 
+    .word = Store the n 32-bi quantities in successive memory words. 
+2. Sets a label and checks if $t3 is 0. If it is, it jumps to the finish: tag, if not, it continues to the next line. 
+3. Jumps to the fib: label.
+4. Assemble the program. Click on the checkmark next to the line you wish to have a breakpoint on, and then run accordingly. 
+5. Continue: Fn + F5
+   Step: Fn + F7
+6. You can look on the right side of the application to see the values of all the registers in hexadecimal. You are allowed to modify the values by clicking on any register's value and typing in a new value. 
+7. It's stored at $t3. This value is already calculated: 233
+8. A syscall is short for "System Call" which is a software interrupt that is meant to make your computer perform a task such as input/output, among other things. You can use this by using the command:
+li $v0, [service number]
+Each service number correlates to a specific action that the syscall could do.
