@@ -1,0 +1,15 @@
+Paired with Preethi Merugumala & Valerie Nguyen
+
+Activity #1:
+1. 
+    Text: 0x00400000
+    Data: 0x10010000
+2. Basic Assembly is strictly using the register number ($8) without any labels, which makes any jumps (j) have a corresponding hex address indicating where in the code the instructions need to go. Source Assembly contains more readable register names ($t0) and contains labels that can be used to jump from line to line. 
+3. 4 bytes.
+4. 8. 
+5. This correlates to an increment in every 4 bits.
+6. You can "set" a label equal to a value by declaring it as a word and setting that word equal to a value.
+    m:      .word 20
+7. Address: 0x10010000
+8. You're able to set a label to a string by using the ".asciiz" tag. There is also a similar tag ".ascii" which has the same function except each string declared using this tag doesn't have a null terminator "\0".
+9. 
