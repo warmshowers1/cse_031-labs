@@ -5,11 +5,28 @@ Activity #1:
     Text: 0x00400000
     Data: 0x10010000
 2. Basic Assembly is strictly using the register number ($8) without any labels, which makes any jumps (j) have a corresponding hex address indicating where in the code the instructions need to go. Source Assembly contains more readable register names ($t0) and contains labels that can be used to jump from line to line. 
-3. 4 bytes.
+3. 20 bytes.
 4. 8. 
 5. This correlates to an increment in every 4 bits.
-6. You can "set" a label equal to a value by declaring it as a word and setting that word equal to a value.
+6. You can "set" a label equal to a string by declaring it as a word and setting that word equal to a value.
     m:      .word 20
-7. Address: 0x10010000
-8. You're able to set a label to a string by using the ".asciiz" tag. There is also a similar tag ".ascii" which has the same function except each string declared using this tag doesn't have a null terminator "\0".
-9. 
+7. Address: 0x10010004
+8. https://courses.cs.vt.edu/cs2506/Fall2014/Notes/L04.MIPSAssemblyOverview.pdf
+You're able to set a label to a string by using the ".asciiz" tag. There is also a similar tag ".ascii" which has the same function except each string declared using this tag doesn't have a null terminator "\0".
+9. Address: 0x10010008, 0x1001000c, 0x10010010
+10. Yes, it agrees. 
+11. https://chortle.ccsu.edu/AssemblyTutorial/Chapter-22/ass22_4.html
+    This basically says that in order to print a string, there are three source commands that are requires:
+    li v0, 4        #This loads the system code 4 into the return value. System code 4 means "print string"
+    la a0, str1         #This loads the beginning address of the string into the a0 register
+    syscall         #This looks into the v0 register to perform the action specified on a0
+12. la $t3, n 
+    This instruction is meant to store the address of a label "n" into the register $t3. 
+
+Activity #2:
+1. Because that would make the processor run slower. Having less instructions ultimately makes the processor run more smoothly. 
+2. *Completed*
+3. *Completed*
+4. List of syscalls: http://www.doc.ic.ac.uk/lab/secondyear/spim/node8.html
+5. *Completed*
+6. *Completed*
