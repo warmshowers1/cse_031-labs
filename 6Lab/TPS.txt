@@ -30,3 +30,5 @@ Activity #2:
 4. List of syscalls: http://www.doc.ic.ac.uk/lab/secondyear/spim/node8.html
 5. *Completed*
 6. *Completed*
+7. *Completed*
+8. *Completed*

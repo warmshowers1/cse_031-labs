@@ -21,7 +21,7 @@ int main(){
 	printArray(arr, n);
 
     	// (6) Add your code to make arr a diagonal matrix
-    	for(i = 0; i < n; i++){
+    for(i = 0; i < n; i++){
 		for(j = 0; j < n; j++){
 			if(i == j)
 				*(*(arr + i) + j) = (j + 1);

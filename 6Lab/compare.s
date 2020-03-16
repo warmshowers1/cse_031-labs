@@ -14,9 +14,13 @@ main:   li $v0, 5           # Take in user input
         la $s0, n           # Store n in $s0
         lw $s0, 0($s0)
 
-        slt $t1, $t0, $s0   # Check if $s0 < $t0, if yes: $t1 = 1, if no: $t1 = 0
-        bne $t1, $0, less   # Is $t1 != 0? (is $t1 = 1?)
-        j greq              # Jump to greq if $t1 = 0
+        #slt $t1, $t0, $s0   # Check if $s0 < $t0, if yes: $t1 = 1, if no: $t1 = 0
+        #bne $t1, $0, less   # Is $t1 != 0? (is $t1 = 1?)
+        #j greq              # Jump to greq if $t1 = 0
+        
+        slt $t1, $s0, $t0    #Check if $t0 <= $s0, if yes: $t1 = 0, if no: $t1 = 1
+        bne $t1, $0, great   # Is $t1 != 0? (is $t1 = 1?)
+        j leq                # Jump to greq if $t1 = 1
 
 less:   la $a0, str1
         #lw $a0, 0($a0)
