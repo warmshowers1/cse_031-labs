@@ -1,0 +1,18 @@
+Activity #1:
+1. 
+2. *Completed*
+3. *Completed*
+4. 
+5. 
+6. 
+7. The program errors. "Error in : invalid program counter value: 0x00000000"
+8. The line after the original jump was called. 
+9. It realistically should be correct, although that has yet to be determined since this question specifically tells me not to execute the code. 
+10. The new return address is: 0x0040001c. The output is 15. 
+11. jal
+12. *Completed*
+
+Activity #2:
+1. The output will be 38. 
+2. It will have an infinite loop. 
+3. 
