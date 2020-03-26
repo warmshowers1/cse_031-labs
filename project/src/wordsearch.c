@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
 	fclose(fptr);
 
 	// Open file for reading word list
-	fptr = fopen("states.txt", "r");
+	fptr = fopen("puzzle/states.txt", "r"); //Be aware, I edited this line for file organization purposes
 	if (fptr == NULL) {
         printf("Cannot Open Words File!\n");
         return 0;
@@ -80,12 +80,18 @@ int main(int argc, char **argv) {
 void printPuzzle(char** arr, int n){
 	// This function will print out the complete puzzle grid (arr). It must produce the output in the SAME format as the samples in the instructions.
 	// Your implementation here
-
-
+    int i, j;
+    for(i = 0; i < n; i++)
+        for(j = 0; j < n; j++)
+            if(j != (n - 1))
+                printf("%c ", *(*(arr + i) + j));
+            else
+                printf("%c\n", *(*(arr + i) + j));
 }
 
 void searchPuzzle(char** arr, int n, char** list, int listSize){
 	// This function checks if arr contains words from list. If a word appears in arr, it will print out that word and then convert that word entry in arr into lower case.
 	// Your implementation here
+    
 
 }
