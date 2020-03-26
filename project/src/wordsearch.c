@@ -7,6 +7,8 @@
 // Feel free to declare any helper functions
 void printPuzzle(char** arr, int n);
 void searchPuzzle(char** arr, int n, char** list, int listSize);
+int* wordRange(char** list, int listSize);
+char toLower(char letter);
 
 // Main function, DO NOT MODIFY!!!	
 int main(int argc, char **argv) {
@@ -83,15 +85,31 @@ void printPuzzle(char** arr, int n){
     int i, j;
     for(i = 0; i < n; i++)
         for(j = 0; j < n; j++)
-            if(j != (n - 1))
-                printf("%c ", *(*(arr + i) + j));
-            else
-                printf("%c\n", *(*(arr + i) + j));
+            if(j != (n - 1)) printf("%c ", *(*(arr + i) + j));
+            else printf("%c\n", *(*(arr + i) + j));
 }
 
 void searchPuzzle(char** arr, int n, char** list, int listSize){
 	// This function checks if arr contains words from list. If a word appears in arr, it will print out that word and then convert that word entry in arr into lower case.
 	// Your implementation here
+    int* range = wordRange(list, listSize); // *range = lower   *(range + 1) = upper
     
+}
 
+int* wordRange(char** list, int listSize){
+    int* range = (int*)malloc(2 * sizeof(int));
+    *range = strlen(*list);
+    *(range + 1) = strlen(*list);
+    int i, j;
+    for(i = 1; i < listSize; i++)
+        if(*range > strlen(*(list + i)))
+            *range = strlen(*(list + i));
+        else if(*(range + 1) < strlen(*(list + i)))
+            *(range + 1) = strlen(*(list + i));
+    return range;
+}
+
+char toLower(char letter){
+    if(letter >= 65 && letter <= 90) letter += 32;
+    return letter;
 }
