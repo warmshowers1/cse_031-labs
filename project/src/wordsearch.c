@@ -8,7 +8,8 @@
 void printPuzzle(char** arr, int n);
 void searchPuzzle(char** arr, int n, char** list, int listSize);
 int* wordRange(char** list, int listSize);
-char toLower(char letter);
+void toLower(char* letter);
+char*** createHashMap(char** list, int listSize);
 
 // Main function, DO NOT MODIFY!!!	
 int main(int argc, char **argv) {
@@ -92,8 +93,11 @@ void printPuzzle(char** arr, int n){
 void searchPuzzle(char** arr, int n, char** list, int listSize){
 	// This function checks if arr contains words from list. If a word appears in arr, it will print out that word and then convert that word entry in arr into lower case.
 	// Your implementation here
-    int* range = wordRange(list, listSize); // *range = lower   *(range + 1) = upper
-    
+    int* range = wordRange(list, listSize);
+    int i, j, lower = *range, upper = *(range + 1);
+    char*** words = createHashMap(list, listSize);
+    // Left to right
+
 }
 
 int* wordRange(char** list, int listSize){
@@ -101,15 +105,54 @@ int* wordRange(char** list, int listSize){
     *range = strlen(*list);
     *(range + 1) = strlen(*list);
     int i, j;
-    for(i = 1; i < listSize; i++)
+    for(i = 1; i < listSize; i++){
         if(*range > strlen(*(list + i)))
             *range = strlen(*(list + i));
         else if(*(range + 1) < strlen(*(list + i)))
             *(range + 1) = strlen(*(list + i));
+    }
     return range;
 }
 
-char toLower(char letter){
-    if(letter >= 65 && letter <= 90) letter += 32;
-    return letter;
+void toLower(char* letter){
+    if(*letter >= 65 && *letter <= 90) *letter += 32;
+    else printf("The character passed was not between A - Z\n");
+}
+
+int key(char* word){
+    int num = (int) (*word);
+    num += (int) (*(word + (strlen(word) / 2)));
+    return (num % 26);
+}
+
+char*** createHashMap(char** list, int listSize){
+    // This creates 26 buckets
+    char*** hash = (char***)malloc(26 * sizeof(char**));
+    int i, j, k, count;
+    // This allocates the correct number of spots in each bucket
+    for(i = 0; i < 26; i++){
+        count = 0;
+        // Counts the number of allocated spots necessary for the i'th bucket
+        for(j = 0; j < listSize; j++)
+            if(i == key(*(list + j))) count++;
+        if(count != 0){
+            *(hash + i) = (char**)malloc(count * sizeof(char*));
+            for(j = 0; j < count; j++)
+                *(*(hash + i) + j) = (char*)malloc(20 * sizeof(char));
+        }
+    }
+    // Goes through the list of words and copies them into the hashmap
+    for(i = 0; i < listSize; i++){
+        // Find the open space in the corresponding bucket
+        count = 0;
+        // printf("%p\n", **(*(hash + key(*(list + i))) + count));
+        while((**(*(hash + key(*(list + i))) + count)) != NULL) count++;
+        
+        // Copies each specific letter into the hashmap
+        for(j = 0; j < strlen(*(list + i)); j++){
+            *(*(*(hash + key(*(list + i))) + count) + j) = *(*(list + i) + j);
+        }
+    }
+
+    return hash;
 }
