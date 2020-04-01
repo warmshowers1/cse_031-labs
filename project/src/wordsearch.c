@@ -97,26 +97,38 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
 	// This function checks if arr contains words from list. If a word appears in arr, it will print out that word and then convert that word entry in arr into lower case.
 	// Your implementation here
     int* range = wordRange(list, listSize);
-    int i, j, k, m, index, lower = *range, upper = *(range + 1);
+    int i, j, k, m, o, index, limit, lower = *range, upper = *(range + 1);
     char* ptr = (char*)malloc(20 * sizeof(char));
     // Left to Right && Right to Left
     for(i = 0; i < n; i++){                             // i: Which row we're searching
         // printf("----- New line -----\n");
-        for(j = 0; j <= (n - lower); j++){              // j: How long our guess word is
+        for(j = 0; j <= (n - lower); j++){              // j: Where to start our word guess
             index = 0;
             for(k = j; k < (lower + j - 1); k++){       // k: Which segment of the word search we're checking
                 *(ptr + index) = *(*(arr + i) + k);
                 index++;
             }
-            for(k = (lower + j - 1); k < upper; k++){
+            if((upper + j) <= n) limit = upper + j;
+            else limit = n;
+            for(k = (lower + j - 1); k < limit; k++){
                 *(ptr + index) = *(*(arr + i) + k);
                 // printf("Checking \"%s\" against the list.\n", ptr);
-                for(m = 0; m < listSize; m++){          // m: Checks the list size
-                    if(strcmpi(ptr, *(list + m)) == 1)
+                for(m = 0; m < listSize; m++){          // m: Checks the guess with the list
+                    if(strcmpi(ptr, *(list + m)) == 1){
                         printf("Word found: %s & %s\n", ptr, *(list + m));
+                        for(o = 0; o < strlen(ptr); o++){
+                            toLower(*(arr + i) + (k - o));
+                        }
+                        break;
+                    }
                     strrev(ptr);
-                    if(strcmpi(ptr, *(list + m)) == 1)
+                    if(strcmpi(ptr, *(list + m)) == 1){
                         printf("Word found: %s & %s\n", ptr, *(list + m));
+                        for(o = 0; o < strlen(ptr); o++){
+                            toLower(*(arr + i) + (k - o));
+                        }
+                        break;
+                    }
                     strrev(ptr);
                 }
                 index++;
@@ -126,7 +138,33 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
     }
 
     // Top to bottom
-    
+    for(i = 0; i < n; i++){                             // i: Which column we're searching
+        // printf("----- New column -----\n");
+        for(j = 0; j <= (n - lower); j++){              // j: Where to start our word guess
+            index = 0;
+            for(k = j; k < (lower + j - 1); k++){       // k: Which segment of the word search we're checking
+                *(ptr + index) = *(*(arr + k) + i);
+                index++;
+            }
+            if((upper + j) <= n) limit = upper + j;
+            else limit = n;
+            for(k = (lower + j - 1); k < limit; k++){
+                *(ptr + index) = *(*(arr + k) + i);
+                // printf("Checking \"%s\" against the list.\n", ptr);
+                for(m = 0; m < listSize; m++){          // m: Checks the guess with the list
+                    if(strcmpi(ptr, *(list + m)) == 1){
+                        printf("Word found: %s & %s\n", ptr, *(list + m));
+                        for(o = 0; o < strlen(ptr); o++){
+                            toLower(*(arr + (k - o)) + i);
+                        }
+                        break;
+                    }
+                }
+                index++;
+            }
+            clearStr(ptr);
+        }
+    }
 }
 
 int* wordRange(char** list, int listSize){
@@ -146,7 +184,7 @@ int* wordRange(char** list, int listSize){
 
 void toLower(char* letter){
     if(*letter >= 65 && *letter <= 90) *letter += 32;
-    else printf("The character passed was not between A - Z\n");
+    else printf("The character passed was not between A - Z: %c\n", *letter);
 }
 
 void strrev(char* word){
