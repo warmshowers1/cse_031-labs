@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
 	fclose(fptr);
 
 	// Open file for reading word list
-	fptr = fopen("puzzle/states.txt", "r"); //Be aware, I edited this line for file organization purposes
+	fptr = fopen("puzzle/states.txt", "r"); //Be aware, I edited this line for file organization purposes, the original line is below
 	// fptr = fopen("states.txt", "r"); // This is the original line
 	if (fptr == NULL) {
         printf("Cannot Open Words File!\n");
@@ -86,7 +86,7 @@ int main(int argc, char **argv) {
 void printPuzzle(char** arr, int n){
 	// This function will print out the complete puzzle grid (arr). It must produce the output in the SAME format as the samples in the instructions.
 	// Your implementation here
-    int i, j;
+    char i, j;
     for(i = 0; i < n; i++)
         for(j = 0; j < n; j++)
             if(j != (n - 1)) printf("%c ", *(*(arr + i) + j));
@@ -99,12 +99,12 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
     int* range = wordRange(list, listSize);
     int i, j, k, m, o, index, limit, lower = *range, upper = *(range + 1);
     char* ptr = (char*)malloc(20 * sizeof(char));
+
     // Left -> Right && Right -> Left
-    for(i = 0; i < n; i++){                             // i: Which row we're searching
-        // printf("----- New line -----\n");
-        for(j = 0; j <= (n - lower); j++){              // j: Where to start our word guess
+    for(i = 0; i < n; i++){                                         // i: Which row we're searching
+        for(j = 0; j <= (n - lower); j++){                          // j: Where to start our word guess
             index = 0;
-            for(k = j; k < (lower + j - 1); k++){       // k: Which segment of the word search we're checking
+            for(k = j; k < (lower + j - 1); k++){                   // k: Which segment of the word search we're checking
                 *(ptr + index) = *(*(arr + i) + k);
                 index++;
             }
@@ -112,18 +112,17 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
             else limit = n;
             for(k = (lower + j - 1); k < limit; k++){
                 *(ptr + index) = *(*(arr + i) + k);
-                // printf("Checking \"%s\" against the list.\n", ptr);
-                for(m = 0; m < listSize; m++){          // m: Checks the guess with the list
+                for(m = 0; m < listSize; m++){                      // m: Checks the guess with the list
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s & %s\n", ptr, *(list + m));
-                        for(o = 0; o < strlen(ptr); o++){
+                        printf("Word found: %s\n", *(list + m));
+                        for(o = 0; o < strlen(ptr); o++){           // o: Which letters we need to make lowercase
                             toLower(*(arr + i) + (k - o));
                         }
                         break;
                     }
                     strrev(ptr);
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s & %s\n", ptr, *(list + m));
+                        printf("Word found: %s\n", *(list + m));
                         for(o = 0; o < strlen(ptr); o++){
                             toLower(*(arr + i) + (k - o));
                         }
@@ -138,11 +137,10 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
     }
 
     // Top -> bottom
-    for(i = 0; i < n; i++){                             // i: Which column we're searching
-        // printf("----- New column -----\n");
-        for(j = 0; j <= (n - lower); j++){              // j: Where to start our word guess
+    for(i = 0; i < n; i++){                                         // i: Which column we're searching
+        for(j = 0; j <= (n - lower); j++){                          // j: Where to start our word guess
             index = 0;
-            for(k = j; k < (lower + j - 1); k++){       // k: Which segment of the word search we're checking
+            for(k = j; k < (lower + j - 1); k++){                   // k: Which segment of the word search we're checking
                 *(ptr + index) = *(*(arr + k) + i);
                 index++;
             }
@@ -150,11 +148,10 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
             else limit = n;
             for(k = (lower + j - 1); k < limit; k++){
                 *(ptr + index) = *(*(arr + k) + i);
-                // printf("Checking \"%s\" against the list.\n", ptr);
-                for(m = 0; m < listSize; m++){          // m: Checks the guess with the list
+                for(m = 0; m < listSize; m++){                      // m: Checks the guess with the list
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s & %s\n", ptr, *(list + m));
-                        for(o = 0; o < strlen(ptr); o++){
+                        printf("Word found: %s\n", *(list + m));
+                        for(o = 0; o < strlen(ptr); o++){           // o: Which letters we need to make lowercase
                             toLower(*(arr + (k - o)) + i);
                         }
                         break;
@@ -178,10 +175,9 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
             else limit = n - i;
             for(k = (lower + j - 1); k < limit; k++){
                 *(ptr + index) = *(*(arr + (i + k)) + k);
-                // printf("Checking \"%s\" against the list.\n", ptr);
-                for(m = 0; m < listSize; m++){          // m: Checks the guess with the list
+                for(m = 0; m < listSize; m++){
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s & %s\n", ptr, *(list + m));
+                        printf("Word found: %s\n", *(list + m));
                         for(o = 0; o < strlen(ptr); o++){
                             toLower(*(arr + ((i + k) - o)) + (k - o));
                         }
@@ -204,10 +200,9 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
             else limit = n - i;
             for(k = (lower + j - 1); k < limit; k++){
                 *(ptr + index) = *(*(arr + k) + (i + k));
-                // printf("Checking \"%s\" against the list.\n", ptr);
-                for(m = 0; m < listSize; m++){          // m: Checks the guess with the list
+                for(m = 0; m < listSize; m++){
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s & %s\n", ptr, *(list + m));
+                        printf("Word found: %s\n", *(list + m));
                         for(o = 0; o < strlen(ptr); o++){
                             toLower(*(arr + (k - o)) + ((i + k) - o));
                         }
@@ -232,10 +227,9 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
             else limit = n - i;
             for(k = (lower + j - 1); k < limit; k++){
                 *(ptr + index) = *(*(arr + (i + k)) + (n - k - 1));
-                // printf("Checking \"%s\" against the list.\n", ptr);
-                for(m = 0; m < listSize; m++){          // m: Checks the guess with the list
+                for(m = 0; m < listSize; m++){
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s & %s\n", ptr, *(list + m));
+                        printf("Word found: %s\n", *(list + m));
                         for(o = 0; o < strlen(ptr); o++){
                             toLower(*(arr + ((i + k) - o)) + ((n - k - 1) + o));
                         }
@@ -258,10 +252,9 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
             else limit = n - i;
             for(k = (lower + j - 1); k < limit; k++){
                 *(ptr + index) = *(*(arr + k) + (n - (i + k) - 1));
-                // printf("Checking \"%s\" against the list.\n", ptr);
-                for(m = 0; m < listSize; m++){          // m: Checks the guess with the list
+                for(m = 0; m < listSize; m++){
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s & %s\n", ptr, *(list + m));
+                        printf("Word found: %s\n", *(list + m));
                         for(o = 0; o < strlen(ptr); o++){
                             toLower(*(arr + (k - o)) + ((n - (i + k) - 1) + o));
                         }
@@ -286,13 +279,11 @@ int* wordRange(char** list, int listSize){
         else if(*(range + 1) < strlen(*(list + i)))
             *(range + 1) = strlen(*(list + i));
     }
-    printf("Lower limit: %d\nUpper limit: %d\n", *range, *(range + 1));
     return range;
 }
 
 void toLower(char* letter){
     if(*letter >= 65 && *letter <= 90) *letter += 32;
-    else printf("The character passed was not between A - Z: %c\n", *letter);
 }
 
 void strrev(char* word){
