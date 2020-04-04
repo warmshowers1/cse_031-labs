@@ -343,16 +343,13 @@ void clearStr(char* word){
 void alphaSort(char** list, int listSize){
     int i, j, k;
     char* holder = (char*)malloc(20 * sizeof(char));
-    for(i = 0; i < listSize; i++){
-        for(j = 0; j < strlen(*(list + i)); j++){
+    for(i = 0; i < listSize; i++)
+        for(j = 0; j < strlen(*(list + i)); j++)
             toLower(*(list + i) + j);
-        }
-    }
     for(i = 0; i < (listSize - 1); i++){
         for(j = (i + 1); j < listSize; j++){
             k = 0;
-            while((*(*(list + i) + k) == *(*(list + j) + k)) && k < strlen(*(list + i)) && k < strlen(*(list + j))) 
-                k++;
+            while((*(*(list + i) + k) == *(*(list + j) + k)) && k < strlen(*(list + i)) && k < strlen(*(list + j))) k++;
             if(*(*(list + j) + k) < *(*(list + i) + k)){
                 strcpyi(holder, *(list + j));
                 strcpyi(*(list + j), *(list + i));
