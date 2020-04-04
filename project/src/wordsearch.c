@@ -11,7 +11,10 @@ int* wordRange(char** list, int listSize);
 void toLower(char* letter);
 void strrev(char* word);
 char strcmpi(char* str1, char* str2);
+void strcpyi(char* dest, char* src);
 void clearStr(char* word);
+void alphaSort(char** list, int listSize);
+void printFound(char** list, int listSize);
 
 // Main function, DO NOT MODIFY!!!	
 int main(int argc, char **argv) {
@@ -97,8 +100,11 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
 	// This function checks if arr contains words from list. If a word appears in arr, it will print out that word and then convert that word entry in arr into lower case.
 	// Your implementation here
     int* range = wordRange(list, listSize);
-    int i, j, k, m, o, index, limit, lower = *range, upper = *(range + 1);
+    int i, j, k, m, o, index, limit, found = 0, lower = *range, upper = *(range + 1);
     char* ptr = (char*)malloc(20 * sizeof(char));
+    char** foundWords = (char**)malloc(listSize * sizeof(char*));
+    for(i = 0; i < listSize; i++)
+        *(foundWords + i) = (char*)malloc(20 * sizeof(char));
 
     // Left -> Right && Right -> Left
     for(i = 0; i < n; i++){                                         // i: Which row we're searching
@@ -114,7 +120,8 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
                 *(ptr + index) = *(*(arr + i) + k);
                 for(m = 0; m < listSize; m++){                      // m: Checks the guess with the list
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s\n", *(list + m));
+                        strcpyi(*(foundWords + found), *(list + m));
+                        found++;
                         for(o = 0; o < strlen(ptr); o++){           // o: Which letters we need to make lowercase
                             toLower(*(arr + i) + (k - o));
                         }
@@ -122,7 +129,8 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
                     }
                     strrev(ptr);
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s\n", *(list + m));
+                        strcpyi(*(foundWords + found), *(list + m));
+                        found++;
                         for(o = 0; o < strlen(ptr); o++){
                             toLower(*(arr + i) + (k - o));
                         }
@@ -150,7 +158,8 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
                 *(ptr + index) = *(*(arr + k) + i);
                 for(m = 0; m < listSize; m++){                      // m: Checks the guess with the list
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s\n", *(list + m));
+                        strcpyi(*(foundWords + found), *(list + m));
+                        found++;
                         for(o = 0; o < strlen(ptr); o++){           // o: Which letters we need to make lowercase
                             toLower(*(arr + (k - o)) + i);
                         }
@@ -177,7 +186,8 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
                 *(ptr + index) = *(*(arr + (i + k)) + k);
                 for(m = 0; m < listSize; m++){
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s\n", *(list + m));
+                        strcpyi(*(foundWords + found), *(list + m));
+                        found++;
                         for(o = 0; o < strlen(ptr); o++){
                             toLower(*(arr + ((i + k) - o)) + (k - o));
                         }
@@ -202,7 +212,8 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
                 *(ptr + index) = *(*(arr + k) + (i + k));
                 for(m = 0; m < listSize; m++){
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s\n", *(list + m));
+                        strcpyi(*(foundWords + found), *(list + m));
+                        found++;
                         for(o = 0; o < strlen(ptr); o++){
                             toLower(*(arr + (k - o)) + ((i + k) - o));
                         }
@@ -229,7 +240,8 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
                 *(ptr + index) = *(*(arr + (i + k)) + (n - k - 1));
                 for(m = 0; m < listSize; m++){
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s\n", *(list + m));
+                        strcpyi(*(foundWords + found), *(list + m));
+                        found++;
                         for(o = 0; o < strlen(ptr); o++){
                             toLower(*(arr + ((i + k) - o)) + ((n - k - 1) + o));
                         }
@@ -254,7 +266,8 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
                 *(ptr + index) = *(*(arr + k) + (n - (i + k) - 1));
                 for(m = 0; m < listSize; m++){
                     if(strcmpi(ptr, *(list + m)) == 1){
-                        printf("Word found: %s\n", *(list + m));
+                        strcpyi(*(foundWords + found), *(list + m));
+                        found++;
                         for(o = 0; o < strlen(ptr); o++){
                             toLower(*(arr + (k - o)) + ((n - (i + k) - 1) + o));
                         }
@@ -266,6 +279,8 @@ void searchPuzzle(char** arr, int n, char** list, int listSize){
             clearStr(ptr);
         }
     }
+    alphaSort(foundWords, found);
+    printFound(foundWords, found);
 }
 
 int* wordRange(char** list, int listSize){
@@ -288,7 +303,7 @@ void toLower(char* letter){
 
 void strrev(char* word){
     char holder;
-    for(char i = 0; i < strlen(word) / 2; i++){
+    for(char i = 0; i < (strlen(word) / 2); i++){
         holder = *(word + i);
         *(word + i) = *(word + ((strlen(word) - 1) - i));
         *(word + ((strlen(word) - 1) - i)) = holder;
@@ -307,7 +322,49 @@ char strcmpi(char* str1, char* str2){
     return 1;
 }
 
+void strcpyi(char* dest, char* src){
+    int limit;
+    if(strlen(src) > strlen(dest))
+        limit = strlen(src);
+    else limit = strlen(dest);
+    for(int i = 0; i < limit; i++){
+        if(*(src + i) != 0)
+            *(dest + i) = *(src + i);
+        else
+            *(dest + i) = 0;
+    }
+}
+
 void clearStr(char* word){
     for(char i = strlen(word) - 1; i >= 0 ; i--)
         *(word + i) = 0;
+}
+
+void alphaSort(char** list, int listSize){
+    int i, j, k;
+    char* holder = (char*)malloc(20 * sizeof(char));
+    for(i = 0; i < listSize; i++){
+        for(j = 0; j < strlen(*(list + i)); j++){
+            toLower(*(list + i) + j);
+        }
+    }
+    for(i = 0; i < (listSize - 1); i++){
+        for(j = (i + 1); j < listSize; j++){
+            k = 0;
+            while((*(*(list + i) + k) == *(*(list + j) + k)) && k < strlen(*(list + i)) && k < strlen(*(list + j))) 
+                k++;
+            if(*(*(list + j) + k) < *(*(list + i) + k)){
+                strcpyi(holder, *(list + j));
+                strcpyi(*(list + j), *(list + i));
+                strcpyi(*(list + i), holder);
+            }
+        }
+    }
+    for(i = 0; i < listSize; i++)
+        **(list + i) = **(list + i) - 32;
+}
+
+void printFound(char** list, int listSize){
+    for(int i = 0; i < listSize; i++)
+        printf("Word found: %s\n", *(list + i));
 }
