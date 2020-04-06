@@ -1,5 +1,6 @@
 Activity #1:
-1. 
+1. A function returns a value while a procedure does not. A method is essentially a function but more exclusive to a class in object oriented programming. 
+https://softwareengineering.stackexchange.com/questions/20909/method-vs-function-vs-procedure
 2. *Completed*
 3. *Completed*
 4. Line 12, is an instruction to jump to line 20. Line 20 adds the registers $a0 and $a1 and loads the value into $v0.
@@ -15,4 +16,7 @@ Activity #1:
 Activity #2:
 1. The output will be 38. 
 2. It will have an infinite loop. 
-3. 
+3. The command jal allows the MIPS code to jump to the register specified and then save the return address (the line just after the jal command was called) to the register $ra. Once the jal command was called again within SUM, the original return address was lost with no way of returning to the MAIN function. 
+4. We can simply save the original value of $a0 to the stack using the commands: addi $sp, $sp, 4; sw $a0, 0($sp);
+5. The original value of $s0 (x) is replaced by the value m. This is not necessarily a problem unless the program doesn't properly account for this instruction later, which it appears the code didn't.
+6. *Completed*
