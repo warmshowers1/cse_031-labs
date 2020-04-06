@@ -15,18 +15,26 @@ MAIN:	la $t0, x
 		jal SUM
 		add $t0, $s1, $s0
 		add $s1, $t0, $v0
-		addi $a0, $s1, 0 
-		li $v0, 1		 
-		syscall	
+		addi $a0, $s1, 0
+		li $v0, 1
+		syscall
 		j END
-
 		
-SUM: 	la $t0, m
+SUM:    addi $sp, $sp -4
+		sw $s0, 0($sp)		# Backup s0 from MAIN
+        la $t0, m
 		lw $s0, 0($t0)		# s0 = m
+        addi $sp, $sp, -4
+        sw $a0, 0($sp)      # Backup a0 from SUM
 		add $a0, $s0, $a0	# Update a0 as new argument for SUB
+        addi $sp, $sp, -4
+        sw $ra, 0($sp)      # Backup ra to return to MAIN
 		jal SUB
+		lw $a0, 4($sp)
+		lw $s0, 8($sp)
 		add $v0, $a0, $v0
-		jr $ra		
+        lw $ra, 0($sp)
+		jr $ra
 		
 SUB:	la $t0, b
 		addi $sp, $sp -4
@@ -36,6 +44,5 @@ SUB:	la $t0, b
 		lw $s0, 0($sp)		# Restore s0 from SUM
 		addi $sp, $sp 4
 		jr $ra
-
 		
 END:
