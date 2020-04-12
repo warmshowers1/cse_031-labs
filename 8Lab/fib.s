@@ -4,8 +4,9 @@ n:      .word 13
         .text
 main: 	add     $t0, $0, $zero
 		addi    $t1, $zero, 1
-		la      $t3, n
-		lw      $t3, 0($t3)
+        li      $v0, 5
+        syscall
+        addi    $t3, $0, $v0
 		
 fib: 	beq     $t3, $0, finish
 		add     $t2,$t1,$t0
