@@ -10,13 +10,13 @@ str2: .asciiz "Greater than or equal to\n"
 	syscall
 	move $s1, $v0	
 
-	# Tps 1 part 9
+	# Tps 1 part 7
 	slt $t0, $s1, $s0
 	
-	# Tps 1 part 14
+	# Tps 1 part 8
 	bne $t0, $zero, LESS
 	
-	# Tps 1 part 20
+	# Tps 1 part 9
 	j GREQ
 
 LESS:	li $v0, 4 

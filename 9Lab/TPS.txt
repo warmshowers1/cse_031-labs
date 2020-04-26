@@ -1,0 +1,71 @@
+Activity #1:
+1. *Completed*
+2. *Completed*
+3. *Completed*
+4. 32 bits
+5. There are three types of formats:
+
+   - R format
+   - I format
+   - J format
+   The two easiest examples are:
+
+The I format, which stands for "Immediate" format. Which tells us that the first 6 bits are the OP code, the next 5 represent the source register (rs), next 5 represent the target register (rt), and the final 16 represent an immediate value, such as an integer. This format is most recognizable command in I format is addi. 
+
+And the J format, which has a 6 bit OP code, followed by a 26 bit address. This is primarily used for commands like j & jal. 
+
+Even though addresses are 32 bits we're able to use tricks to get a correct address out of the 26 bits we have by placing four zeros at the beginning of the given address, followed by another two zeros placed at the end. These last two zeros are due to the fact that every instruction takes four bytes, meaning that we can safely assume the address is always in incremements of four (the last two bytes will be zero anyway, essentially). 
+
+6. addi $s0, $zero, 25
+    a.  This command is in I format because it is adding an immediate value. This means that it has 4 fields. The first 6 bits are the OP code, the next 5 represent the source register (rs), next 5 represent the target register (rt), and the final 16 represent an immediate value, such as an integer. 
+    b.  op: 8
+        rs: $zero (0x0)
+        rt: $s0 (0x10)
+        Immediate: 0x19
+    c.  Bin: 001000 00000 10000 0000000000011001
+        Hex: 0x20100019
+7. slt $t0, $s1, $s0
+    a.  Bin: 000000 10001 10000 01000 00000 101010
+        Machine Code: 0x0230402a
+    b.  It is in a R format, which is made obvious by the op code (0). It contains 6 fields in this order: op, rs, rt, rd, shamt, funct
+    c.  op: 0x0
+        rs: 0x11
+        rt: 0x10
+        rd: 0x8
+        shamt: 0x0
+        funct: 0x2a
+    d.  slt. This can be identified by the funct value. The value returned will be stored in register $t0, and will be checking if $s1 < $s0. 
+    e.  Final instruction: slt $t0, $s1, $s0
+8. bne $t0, $zero, LESS
+    a.  I format
+    b.  op: 0x5
+        rs: 0x8
+        rt: 0x0
+    c.  LESS. The address is 0x0040001c
+    d.  No, this is unnecessary, and not only that, there is no way we can accurately store a 32 bit address in a 16 bit field. 
+    e.  The immediate field is simply the number of bytes away from the branch instruction. So in this case the LESS label is 5 lines away from the branch instruction, meaning the immediate value should be 20. 
+    f.  Bin: 000101 01000 00000 0000000000010100
+        Hex: 0x15000014
+        No it does not match. My immediate value is wrong. According to the link, the immediate value is meant to be the address value, minus the address of the next instruction, divided by 4. 
+        To put that mathematically, this is what I'm describing: 
+        (0x0040001c - 0x00400018)/4 = 0x00000004/4 = 0x1
+        This makes sense, the label is one address place from the instruction after the branch. 
+        https://courses.cs.washington.edu/courses/cse378/02au/Lectures/07controlI.pdf
+9. j GREQ
+    a.  J format
+    b.  0x2
+    c.  GREQ: 0x00400030
+    d.  We have 26 bits to store a 32 bit address. We can do this by adding 4 zeros at the beginning and 2 zeros at the end of the binary interpretation of the address specified in the jump instruction. 
+        The binary immediate value we were given to jump to is:
+        Bin: 0000 0100 0000 0000 0000 0011 00
+        In order to account for the missing 6 bits, it puts two more zeros at the end like so:
+        Bin: 0000 0100 0000 0000 0000 0011 0000
+        Then add an additional 4 zeros at the beginning. Making the address:
+        Bin: 0000 0000 0100 0000 0000 0000 0011 0000
+    e.  Bin: 0000 1000 0001 0000 0000 0000 0000 1100
+        Hex: 0x0810000c
+        Yes, it is the same.
+
+Activity #2:
+    7.  addi $s0, $zero, -15
+        Bin: 0010 0000 0001 0000 1000 0000 0000 
