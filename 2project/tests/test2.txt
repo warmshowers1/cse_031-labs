@@ -1,0 +1,18 @@
+Test Case #2: 
+
+Money: 13
+n: 3
+Price: 2
+
+Welcome to BobCat Candy, home to the famous BobCat Bars!
+Please enter the price of a Bobcat Bar: 2
+Please enter the number of wrappers needed to exchange for a new bar: 3
+How much money do you have?: 13
+Good! Let me run the number ... 
+You first buy 6 bars.
+Then, you will get another 2 bars.
+With $13, you will receive a maximum of 8 Bobcat Bars!
+
+-- program is finished running --
+
+By my calculations, these numbers seem correct. 
