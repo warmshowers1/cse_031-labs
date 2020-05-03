@@ -2,9 +2,9 @@
 
 ## Test 1
 
-#### Price: 15
-#### n: 6
-#### Money: 100
+ * Price: 15
+ * n: 6
+ * Money: 100
 
 ```
 Welcome to BobCat Candy, home to the famous BobCat Bars!
@@ -26,9 +26,9 @@ By my calculations, these numbers seem correct.
 
 ## Test 2
 
-#### Price: 2
-#### n: 3
-#### Money: 13
+ * Price: 2
+ * n: 3
+ * Money: 13
 
 ```
 Welcome to BobCat Candy, home to the famous BobCat Bars!
@@ -50,9 +50,9 @@ By my calculations, these numbers seem correct.
 
 ## Test 3
 
-#### Price: 4
-#### n: 4
-#### Money: -15
+ * Price: 4
+ * n: 4
+ * Money: -15
 
 ```
 Welcome to BobCat Candy, home to the famous BobCat Bars!
@@ -72,9 +72,9 @@ By my calculations, these numbers seem correct.
 
 ## Test 4
 
-#### Price: 40
-#### n: 5
-#### Money: 30
+ * Price: 40
+ * n: 5
+ * Money: 30
 
 ```
 Welcome to BobCat Candy, home to the famous BobCat Bars!
@@ -95,9 +95,9 @@ By my calculations, these numbers seem correct.
 
 ## Test 5
 
-#### Price: 2
-#### n: 3
-#### Money: 128
+ * Price: 2
+ * n: 3
+ * Money: 128
 
 ```
 Welcome to BobCat Candy, home to the famous BobCat Bars!
@@ -122,9 +122,9 @@ By my calculations, these numbers seem correct.
 
 ## Test 6
 
-#### Price: 2
-#### n: 2
-#### Money: 10
+ * Price: 2
+ * n: 2
+ * Money: 10
 
 ```
 Welcome to BobCat Candy, home to the famous BobCat Bars!
@@ -148,9 +148,9 @@ By my calculations, these numbers seem correct.
 
 ## Test 7
 
-#### Price: 1
-#### n: 4
-#### Money: 15
+ * Price: 1
+ * n: 4
+ * Money: 15
 
 ```
 Welcome to BobCat Candy, home to the famous BobCat Bars!
@@ -170,3 +170,40 @@ With $15, you will receive a maximum of 19 Bobcat Bars!
 ```
 
 By my calculations, these numbers seem correct. 
+
+## Test 8
+
+ * Price: 0
+ * n: 3
+ * Money: 10
+
+```
+Welcome to BobCat Candy, home to the famous BobCat Bars!
+Please enter the price of a Bobcat Bar: 
+0
+This input was unmanageable, the program was terminated.
+
+-- program is finished running --
+```
+
+This output was implemented whenever an input was unmanageable. 
+
+## Test 9
+
+ * Price: 3
+ * n: 1
+ * Money: 60
+
+```
+Welcome to BobCat Candy, home to the famous BobCat Bars!
+Please enter the price of a Bobcat Bar: 
+3
+Please enter the number of wrappers needed to exchange for a new bar: 
+1
+This input was unmanageable, the program was terminated.
+
+-- program is finished running --
+```
+
+This output was implemented whenever an input was unmanageable. 
+
