@@ -1,5 +1,5 @@
 all:
-	gcc -g src/bc.c -o bin/bc
+	gcc -g src/bcc.c -o bin/bcc
 
 clean:
-	rm bin/bc
+	rm bin/bcc
