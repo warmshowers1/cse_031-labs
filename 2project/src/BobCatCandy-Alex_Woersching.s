@@ -78,7 +78,7 @@ maxBars:	addi $sp, $sp, -4
 		mflo $a1
 		# a1 = Bars that can be BOUGHT
 		# a2 = n
-		bgez $a1, check
+		bgt $a1, $0, check
 		li $a1, 0
 		j noprint
 		

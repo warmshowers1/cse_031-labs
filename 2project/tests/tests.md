@@ -85,7 +85,6 @@ Please enter the number of wrappers needed to exchange for a new bar:
 How much money do you have?: 
 30
 Good! Let me run the number ... 
-You first buy 0 bars.
 With $30, you will receive a maximum of 0 Bobcat Bars!
 
 -- program is finished running --
